@@ -2,7 +2,7 @@ NAME
     Parse::Netstat - Parse the output of Unix "netstat" command
 
 VERSION
-    version 0.02
+    version 0.03
 
 SYNOPSIS
      use Parse::Netstat qw(parse_netstat);
