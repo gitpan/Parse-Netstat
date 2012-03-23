@@ -7,7 +7,7 @@ use warnings;
 use Exporter::Lite;
 our @EXPORT_OK = qw(parse_netstat);
 
-our $VERSION = '0.03'; # VERSION
+our $VERSION = '0.04'; # VERSION
 
 our %SPEC;
 
@@ -104,7 +104,7 @@ Parse::Netstat - Parse the output of Unix "netstat" command
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =head1 SYNOPSIS
 
@@ -160,20 +160,16 @@ Sample result:
 
 This module provides parse_netstat().
 
+=head1 SEE ALSO
+
 =head1 FUNCTIONS
 
-None are exported by default, but they are exportable.
 
-=head2 parse_netstat(%args) -> [STATUS_CODE, ERR_MSG, RESULT]
-
+=head2 parse_netstat(%args) -> [status, msg, result, meta]
 
 Parse the output of Unix "netstat" command.
 
-Returns a 3-element arrayref. STATUS_CODE is 200 on success, or an error code
-between 3xx-5xx (just like in HTTP). ERR_MSG is a string containing error
-message, RESULT is the actual result.
-
-Arguments (C<*> denotes required arguments):
+Arguments ('*' denotes required arguments):
 
 =over 4
 
@@ -184,21 +180,23 @@ Output of netstat command.
 This function only parses program's output. You need to invoke "netstat" on your
 own.
 
-=item * B<tcp> => I<bool> (default C<1>)
+=item * B<tcp> => I<bool> (default: 1)
 
 Whether to parse tcp connections.
 
-=item * B<udp> => I<bool> (default C<1>)
+=item * B<udp> => I<bool> (default: 1)
 
 Whether to parse udp connections.
 
-=item * B<unix> => I<bool> (default C<1>)
+=item * B<unix> => I<bool> (default: 1)
 
 Whether to parse unix connections.
 
 =back
 
-=head1 SEE ALSO
+Return value:
+
+Returns an enveloped result (an array). First element (status) is an integer containing HTTP status code (200 means OK, 4xx caller error, 5xx function error). Second element (msg) is a string containing error message, or 'OK' if status is 200. Third element (result) is optional, the actual result. Fourth element (meta) is called result metadata and is optional, a hash that contains extra information.
 
 =head1 AUTHOR
 
@@ -206,7 +204,7 @@ Steven Haryanto <stevenharyanto@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Steven Haryanto.
+This software is copyright (c) 2012 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
