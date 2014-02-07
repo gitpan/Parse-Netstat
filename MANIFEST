@@ -7,6 +7,7 @@ META.yml
 Makefile.PL
 README
 bin/parse-netstat
+bin/parse-netstat-win
 dist.ini
 lib/Parse/Netstat.pm
 t/00-compile.t

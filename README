@@ -1,11 +1,11 @@
 NAME
-    Parse::Netstat - Parse the output of Unix "netstat" command
+    Parse::Netstat - Parse the output of "netstat" command
 
 VERSION
-    version 0.05
+    version 0.06
 
 SYNOPSIS
-     use Parse::Netstat qw(parse_netstat);
+     use Parse::Netstat qw(parse_netstat parse_netstat_win);
 
      my $output = `netstat -anp`;
      my $res = parse_netstat output => $output;
@@ -53,59 +53,124 @@ SYNOPSIS
       }
      ]
 
-DESCRIPTION
-    This module provides parse_netstat().
-
 FUNCTIONS
   parse_netstat(%args) -> [status, msg, result, meta]
-    Parse the output of Unix "netstat -np | -anp" command.
+    Parse the output of Unix "netstat" command.
 
     Netstat can be called with "-n" (show raw IP addresses and port numbers
     instead of hostnames or port names) or without. It can be called with
     "-a" (show all listening and non-listening socket) option or without.
     And can be called with "-p" (show PID/program names) or without.
 
+    For parsing output of Windows "netstat", see parse*netstat*win().
+
     Arguments ('*' denotes required arguments):
 
     *   output* => *str*
 
-        Parse the output of Unix "netstat -np | -anp" command.
+        Parse the output of Unix "netstat" command.
 
         Netstat can be called with "-n" (show raw IP addresses and port
         numbers instead of hostnames or port names) or without. It can be
         called with "-a" (show all listening and non-listening socket)
         option or without. And can be called with "-p" (show PID/program
         names) or without.
+
+        For parsing output of Windows "netstat", see parse*netstat*win().
 
     *   tcp => *bool* (default: 1)
 
-        Parse the output of Unix "netstat -np | -anp" command.
+        Parse the output of Unix "netstat" command.
 
         Netstat can be called with "-n" (show raw IP addresses and port
         numbers instead of hostnames or port names) or without. It can be
         called with "-a" (show all listening and non-listening socket)
         option or without. And can be called with "-p" (show PID/program
         names) or without.
+
+        For parsing output of Windows "netstat", see parse*netstat*win().
 
     *   udp => *bool* (default: 1)
 
-        Parse the output of Unix "netstat -np | -anp" command.
+        Parse the output of Unix "netstat" command.
 
         Netstat can be called with "-n" (show raw IP addresses and port
         numbers instead of hostnames or port names) or without. It can be
         called with "-a" (show all listening and non-listening socket)
         option or without. And can be called with "-p" (show PID/program
         names) or without.
+
+        For parsing output of Windows "netstat", see parse*netstat*win().
 
     *   unix => *bool* (default: 1)
 
-        Parse the output of Unix "netstat -np | -anp" command.
+        Parse the output of Unix "netstat" command.
 
         Netstat can be called with "-n" (show raw IP addresses and port
         numbers instead of hostnames or port names) or without. It can be
         called with "-a" (show all listening and non-listening socket)
         option or without. And can be called with "-p" (show PID/program
         names) or without.
+
+        For parsing output of Windows "netstat", see parse*netstat*win().
+
+    Return value:
+
+    Returns an enveloped result (an array). First element (status) is an
+    integer containing HTTP status code (200 means OK, 4xx caller error, 5xx
+    function error). Second element (msg) is a string containing error
+    message, or 'OK' if status is 200. Third element (result) is optional,
+    the actual result. Fourth element (meta) is called result metadata and
+    is optional, a hash that contains extra information.
+
+  parse_netstat_win(%args) -> [status, msg, result, meta]
+    Parse the output of Windows "netstat" command.
+
+    Netstat can be called with "-n" (show raw IP addresses and port numbers
+    instead of hostnames or port names) or without. It can be called with
+    "-a" (show all listening and non-listening socket) option or without. It
+    can be called with "-o" (show PID) or without. And it can be called with
+    "-b" (show executables) or not.
+
+    For parsing output of Unix "netstat", see parse_netstat().
+
+    Arguments ('*' denotes required arguments):
+
+    *   output* => *str*
+
+        Parse the output of Windows "netstat" command.
+
+        Netstat can be called with "-n" (show raw IP addresses and port
+        numbers instead of hostnames or port names) or without. It can be
+        called with "-a" (show all listening and non-listening socket)
+        option or without. It can be called with "-o" (show PID) or without.
+        And it can be called with "-b" (show executables) or not.
+
+        For parsing output of Unix "netstat", see parse_netstat().
+
+    *   tcp => *bool* (default: 1)
+
+        Parse the output of Windows "netstat" command.
+
+        Netstat can be called with "-n" (show raw IP addresses and port
+        numbers instead of hostnames or port names) or without. It can be
+        called with "-a" (show all listening and non-listening socket)
+        option or without. It can be called with "-o" (show PID) or without.
+        And it can be called with "-b" (show executables) or not.
+
+        For parsing output of Unix "netstat", see parse_netstat().
+
+    *   udp => *bool* (default: 1)
+
+        Parse the output of Windows "netstat" command.
+
+        Netstat can be called with "-n" (show raw IP addresses and port
+        numbers instead of hostnames or port names) or without. It can be
+        called with "-a" (show all listening and non-listening socket)
+        option or without. It can be called with "-o" (show PID) or without.
+        And it can be called with "-b" (show executables) or not.
+
+        For parsing output of Unix "netstat", see parse_netstat().
 
     Return value:
 

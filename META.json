@@ -1,5 +1,5 @@
 {
-   "abstract" : "Parse the output of Unix \"netstat\" command",
+   "abstract" : "Parse the output of \"netstat\" command",
    "author" : [
       "Steven Haryanto <stevenharyanto@gmail.com>"
    ],
@@ -55,7 +55,7 @@
          "web" : "https://github.com/sharyanto/perl-Parse-Netstat"
       }
    },
-   "version" : "0.05",
+   "version" : "0.06",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.010001"

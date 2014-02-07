@@ -8,10 +8,10 @@ use Perinci::CmdLine;
 
 our $VERSION = '0.06'; # VERSION
 
-Perinci::CmdLine->new(url => '/Parse/Netstat/parse_netstat')->run;
+Perinci::CmdLine->new(url => '/Parse/Netstat/parse_netstat_win')->run;
 
-# ABSTRACT: Parse output of 'netstat' command
-# PODNAME: parse-netstat
+# ABSTRACT: Parse output of Windows 'netstat' command
+# PODNAME: parse-netstat-win
 
 __END__
 
@@ -21,7 +21,7 @@ __END__
 
 =head1 NAME
 
-parse-netstat - Parse output of 'netstat' command
+parse-netstat-win - Parse output of Windows 'netstat' command
 
 =head1 VERSION
 

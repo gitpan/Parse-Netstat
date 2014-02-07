@@ -9,7 +9,7 @@ use ExtUtils::MakeMaker 6.30;
 
 
 my %WriteMakefileArgs = (
-  "ABSTRACT" => "Parse the output of Unix \"netstat\" command",
+  "ABSTRACT" => "Parse the output of \"netstat\" command",
   "AUTHOR" => "Steven Haryanto <stevenharyanto\@gmail.com>",
   "BUILD_REQUIRES" => {},
   "CONFIGURE_REQUIRES" => {
@@ -17,7 +17,8 @@ my %WriteMakefileArgs = (
   },
   "DISTNAME" => "Parse-Netstat",
   "EXE_FILES" => [
-    "bin/parse-netstat"
+    "bin/parse-netstat",
+    "bin/parse-netstat-win"
   ],
   "LICENSE" => "perl",
   "NAME" => "Parse::Netstat",
@@ -31,7 +32,7 @@ my %WriteMakefileArgs = (
     "IPC::Open3" => 0,
     "Test::More" => "0.98"
   },
-  "VERSION" => "0.05",
+  "VERSION" => "0.06",
   "test" => {
     "TESTS" => "t/*.t"
   }

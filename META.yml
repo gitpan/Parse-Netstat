@@ -1,5 +1,5 @@
 ---
-abstract: "Parse the output of Unix \"netstat\" command"
+abstract: "Parse the output of \"netstat\" command"
 author:
   - 'Steven Haryanto <stevenharyanto@gmail.com>'
 build_requires:
@@ -24,7 +24,7 @@ resources:
   bugtracker: https://rt.cpan.org/Public/Dist/Display.html?Name=Parse-Netstat
   homepage: https://metacpan.org/release/Parse-Netstat
   repository: git://github.com/sharyanto/perl-Parse-Netstat.git
-version: 0.05
+version: 0.06
 x_Dist_Zilla:
   perl:
     version: 5.010001
