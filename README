@@ -2,7 +2,7 @@ NAME
     Parse::Netstat - Parse the output of Unix "netstat" command
 
 VERSION
-    version 0.04
+    version 0.05
 
 SYNOPSIS
      use Parse::Netstat qw(parse_netstat);
@@ -56,31 +56,56 @@ SYNOPSIS
 DESCRIPTION
     This module provides parse_netstat().
 
-SEE ALSO
 FUNCTIONS
   parse_netstat(%args) -> [status, msg, result, meta]
-    Parse the output of Unix "netstat" command.
+    Parse the output of Unix "netstat -np | -anp" command.
+
+    Netstat can be called with "-n" (show raw IP addresses and port numbers
+    instead of hostnames or port names) or without. It can be called with
+    "-a" (show all listening and non-listening socket) option or without.
+    And can be called with "-p" (show PID/program names) or without.
 
     Arguments ('*' denotes required arguments):
 
     *   output* => *str*
 
-        Output of netstat command.
+        Parse the output of Unix "netstat -np | -anp" command.
 
-        This function only parses program's output. You need to invoke
-        "netstat" on your own.
+        Netstat can be called with "-n" (show raw IP addresses and port
+        numbers instead of hostnames or port names) or without. It can be
+        called with "-a" (show all listening and non-listening socket)
+        option or without. And can be called with "-p" (show PID/program
+        names) or without.
 
     *   tcp => *bool* (default: 1)
 
-        Whether to parse tcp connections.
+        Parse the output of Unix "netstat -np | -anp" command.
+
+        Netstat can be called with "-n" (show raw IP addresses and port
+        numbers instead of hostnames or port names) or without. It can be
+        called with "-a" (show all listening and non-listening socket)
+        option or without. And can be called with "-p" (show PID/program
+        names) or without.
 
     *   udp => *bool* (default: 1)
 
-        Whether to parse udp connections.
+        Parse the output of Unix "netstat -np | -anp" command.
+
+        Netstat can be called with "-n" (show raw IP addresses and port
+        numbers instead of hostnames or port names) or without. It can be
+        called with "-a" (show all listening and non-listening socket)
+        option or without. And can be called with "-p" (show PID/program
+        names) or without.
 
     *   unix => *bool* (default: 1)
 
-        Whether to parse unix connections.
+        Parse the output of Unix "netstat -np | -anp" command.
+
+        Netstat can be called with "-n" (show raw IP addresses and port
+        numbers instead of hostnames or port names) or without. It can be
+        called with "-a" (show all listening and non-listening socket)
+        option or without. And can be called with "-p" (show PID/program
+        names) or without.
 
     Return value:
 
@@ -91,11 +116,27 @@ FUNCTIONS
     the actual result. Fourth element (meta) is called result metadata and
     is optional, a hash that contains extra information.
 
+SEE ALSO
+HOMEPAGE
+    Please visit the project's homepage at
+    <https://metacpan.org/release/Parse-Netstat>.
+
+SOURCE
+    Source repository is at
+    <https://github.com/sharyanto/perl-Parse-Netstat>.
+
+BUGS
+    Please report any bugs or feature requests on the bugtracker website
+    <https://rt.cpan.org/Public/Dist/Display.html?Name=Parse-Netstat>
+
+    When submitting a bug or request, please include a test-file or a patch
+    to an existing test-file that illustrates the bug or desired feature.
+
 AUTHOR
     Steven Haryanto <stevenharyanto@gmail.com>
 
 COPYRIGHT AND LICENSE
-    This software is copyright (c) 2012 by Steven Haryanto.
+    This software is copyright (c) 2014 by Steven Haryanto.
 
     This is free software; you can redistribute it and/or modify it under
     the same terms as the Perl 5 programming language system itself.

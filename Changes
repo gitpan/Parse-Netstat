@@ -1,20 +1,29 @@
 Revision history for Parse-Netstat
 
-0.04    2012-03-23
+0.05    2014-02-07 (SHARYANTO)
 
-        No functional changes. Replace Sub::Spec with Rinci.
+        - Fix parsing UDP line (state was not parsed).
 
+        - Add command-line script: parse-netstat.
 
-0.03    2011-09-29
-
-        Fix parsing: allow whitespace in 'program' field.
-
-
-0.02    2011-09-29
-
-        No functional changes. Add sample result in Synopsis.
+        - Minor updates and tweaks.
 
 
-0.01    2011-09-29
+0.04    2012-03-23 (SHARYANTO)
 
-        First release.
+        - No functional changes. Replace Sub::Spec with Rinci.
+
+
+0.03    2011-09-29 (SHARYANTO)
+
+        - Fix parsing: allow whitespace in 'program' field.
+
+
+0.02    2011-09-29 (SHARYANTO)
+
+        - No functional changes. Add sample result in Synopsis.
+
+
+0.01    2011-09-29 (SHARYANTO)
+
+        - First release.

@@ -1,0 +1,63 @@
+
+use strict;
+use warnings;
+
+use 5.010001;
+
+use ExtUtils::MakeMaker 6.30;
+
+
+
+my %WriteMakefileArgs = (
+  "ABSTRACT" => "Parse the output of Unix \"netstat\" command",
+  "AUTHOR" => "Steven Haryanto <stevenharyanto\@gmail.com>",
+  "BUILD_REQUIRES" => {},
+  "CONFIGURE_REQUIRES" => {
+    "ExtUtils::MakeMaker" => "6.30"
+  },
+  "DISTNAME" => "Parse-Netstat",
+  "EXE_FILES" => [
+    "bin/parse-netstat"
+  ],
+  "LICENSE" => "perl",
+  "NAME" => "Parse::Netstat",
+  "PREREQ_PM" => {
+    "Perinci::CmdLine" => 0,
+    "Rinci" => "v1.1.0"
+  },
+  "TEST_REQUIRES" => {
+    "File::Spec" => 0,
+    "IO::Handle" => 0,
+    "IPC::Open3" => 0,
+    "Test::More" => "0.98"
+  },
+  "VERSION" => "0.05",
+  "test" => {
+    "TESTS" => "t/*.t"
+  }
+);
+
+
+my %FallbackPrereqs = (
+  "File::Spec" => 0,
+  "IO::Handle" => 0,
+  "IPC::Open3" => 0,
+  "Perinci::CmdLine" => 0,
+  "Rinci" => "v1.1.0",
+  "Test::More" => "0.98"
+);
+
+
+unless ( eval { ExtUtils::MakeMaker->VERSION(6.63_03) } ) {
+  delete $WriteMakefileArgs{TEST_REQUIRES};
+  delete $WriteMakefileArgs{BUILD_REQUIRES};
+  $WriteMakefileArgs{PREREQ_PM} = \%FallbackPrereqs;
+}
+
+delete $WriteMakefileArgs{CONFIGURE_REQUIRES}
+  unless eval { ExtUtils::MakeMaker->VERSION(6.52) };
+
+WriteMakefile(%WriteMakefileArgs);
+
+
+
