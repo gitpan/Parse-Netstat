@@ -1,16 +1,22 @@
 #!perl
 
-use 5.010;
+# Note: This script is a CLI interface to Riap function /Parse/Netstat/parse_netstat
+# and generated automatically using Dist::Zilla::Plugin::Rinci::ScriptFromFunc version 0.01
+
+our $DATE = '2014-08-16'; # DATE
+our $VERSION = '0.07'; # VERSION
+
+use 5.010001;
 use strict;
 use warnings;
 
 use Perinci::CmdLine;
 
-our $VERSION = '0.06'; # VERSION
+Perinci::CmdLine->new(
+    url => "/Parse/Netstat/parse_netstat",
+)->run;
 
-Perinci::CmdLine->new(url => '/Parse/Netstat/parse_netstat')->run;
-
-# ABSTRACT: Parse output of 'netstat' command
+# ABSTRACT: Parse the output of Unix "netstat" command
 # PODNAME: parse-netstat
 
 __END__
@@ -21,11 +27,38 @@ __END__
 
 =head1 NAME
 
-parse-netstat - Parse output of 'netstat' command
+parse-netstat - Parse the output of Unix "netstat" command
 
 =head1 VERSION
 
-version 0.06
+This document describes version 0.07 of parse-netstat (from Perl distribution Parse-Netstat), released on 2014-08-16.
+
+=head1 SYNOPSIS
+
+Usage:
+
+ % parse-netstat
+
+Examples:
+
+ TODO
+
+To see all options:
+
+ % parse-netstat --help
+
+=head1 DESCRIPTION
+
+Netstat can be called with C<-n> (show raw IP addresses and port numbers instead
+of hostnames or port names) or without. It can be called with C<-a> (show all
+listening and non-listening socket) option or without. And can be called with
+C<-p> (show PID/program names) or without.
+
+For parsing output of Windows "netstat", see parse_netstat_win().
+
+=head1 OPTIONS
+
+ TODO
 
 =head1 HOMEPAGE
 

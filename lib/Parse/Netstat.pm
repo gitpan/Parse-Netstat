@@ -8,7 +8,7 @@ use Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(parse_netstat parse_netstat_win);
 
-our $VERSION = '0.06'; # VERSION
+our $VERSION = '0.07'; # VERSION
 
 our %SPEC;
 
@@ -52,6 +52,12 @@ _
             schema  => [bool => default => 1],
         },
     },
+    examples => [
+        {
+            src => 'netstat -anp | parse-netstat',
+            src_plang => 'bash',
+        },
+    ],
 };
 sub parse_netstat {
     my %args = @_;
@@ -223,7 +229,7 @@ Parse::Netstat - Parse the output of "netstat" command
 
 =head1 VERSION
 
-version 0.06
+This document describes version 0.07 of Parse::Netstat (from Perl distribution Parse-Netstat), released on 2014-08-16.
 
 =head1 SYNOPSIS
 
@@ -282,12 +288,15 @@ Sample result:
 
 Parse the output of Unix "netstat" command.
 
+Examples:
+
+ parse_netstat();
 Netstat can be called with C<-n> (show raw IP addresses and port numbers instead
 of hostnames or port names) or without. It can be called with C<-a> (show all
 listening and non-listening socket) option or without. And can be called with
 C<-p> (show PID/program names) or without.
 
-For parsing output of Windows "netstat", see parseI<netstat>win().
+For parsing output of Windows "netstat", see parse_netstat_win().
 
 Arguments ('*' denotes required arguments):
 
@@ -295,53 +304,38 @@ Arguments ('*' denotes required arguments):
 
 =item * B<output>* => I<str>
 
-Parse the output of Unix "netstat" command.
+Output of netstat command.
 
-Netstat can be called with C<-n> (show raw IP addresses and port numbers instead
-of hostnames or port names) or without. It can be called with C<-a> (show all
-listening and non-listening socket) option or without. And can be called with
-C<-p> (show PID/program names) or without.
-
-For parsing output of Windows "netstat", see parseI<netstat>win().
+This function only parses program's output. You need to invoke "netstat" on your
+own.
 
 =item * B<tcp> => I<bool> (default: 1)
 
-Parse the output of Unix "netstat" command.
-
-Netstat can be called with C<-n> (show raw IP addresses and port numbers instead
-of hostnames or port names) or without. It can be called with C<-a> (show all
-listening and non-listening socket) option or without. And can be called with
-C<-p> (show PID/program names) or without.
-
-For parsing output of Windows "netstat", see parseI<netstat>win().
+Whether to parse TCP (and TCP6) connections.
 
 =item * B<udp> => I<bool> (default: 1)
 
-Parse the output of Unix "netstat" command.
-
-Netstat can be called with C<-n> (show raw IP addresses and port numbers instead
-of hostnames or port names) or without. It can be called with C<-a> (show all
-listening and non-listening socket) option or without. And can be called with
-C<-p> (show PID/program names) or without.
-
-For parsing output of Windows "netstat", see parseI<netstat>win().
+Whether to parse UDP (and UDP6) connections.
 
 =item * B<unix> => I<bool> (default: 1)
 
-Parse the output of Unix "netstat" command.
-
-Netstat can be called with C<-n> (show raw IP addresses and port numbers instead
-of hostnames or port names) or without. It can be called with C<-a> (show all
-listening and non-listening socket) option or without. And can be called with
-C<-p> (show PID/program names) or without.
-
-For parsing output of Windows "netstat", see parseI<netstat>win().
+Whether to parse Unix socket connections.
 
 =back
 
 Return value:
 
-Returns an enveloped result (an array). First element (status) is an integer containing HTTP status code (200 means OK, 4xx caller error, 5xx function error). Second element (msg) is a string containing error message, or 'OK' if status is 200. Third element (result) is optional, the actual result. Fourth element (meta) is called result metadata and is optional, a hash that contains extra information.
+Returns an enveloped result (an array).
+
+First element (status) is an integer containing HTTP status code
+(200 means OK, 4xx caller error, 5xx function error). Second element
+(msg) is a string containing error message, or 'OK' if status is
+200. Third element (result) is optional, the actual result. Fourth
+element (meta) is called result metadata and is optional, a hash
+that contains extra information.
+
+ (any)
+
 
 =head2 parse_netstat_win(%args) -> [status, msg, result, meta]
 
@@ -361,45 +355,33 @@ Arguments ('*' denotes required arguments):
 
 =item * B<output>* => I<str>
 
-Parse the output of Windows "netstat" command.
+Output of netstat command.
 
-Netstat can be called with C<-n> (show raw IP addresses and port numbers instead
-of hostnames or port names) or without. It can be called with C<-a> (show all
-listening and non-listening socket) option or without. It can be called with
-C<-o> (show PID) or without. And it can be called with C<-b> (show executables) or
-not.
-
-For parsing output of Unix "netstat", see parse_netstat().
+This function only parses program's output. You need to invoke "netstat" on your
+own.
 
 =item * B<tcp> => I<bool> (default: 1)
 
-Parse the output of Windows "netstat" command.
-
-Netstat can be called with C<-n> (show raw IP addresses and port numbers instead
-of hostnames or port names) or without. It can be called with C<-a> (show all
-listening and non-listening socket) option or without. It can be called with
-C<-o> (show PID) or without. And it can be called with C<-b> (show executables) or
-not.
-
-For parsing output of Unix "netstat", see parse_netstat().
+Whether to parse TCP (and TCP6) connections.
 
 =item * B<udp> => I<bool> (default: 1)
 
-Parse the output of Windows "netstat" command.
-
-Netstat can be called with C<-n> (show raw IP addresses and port numbers instead
-of hostnames or port names) or without. It can be called with C<-a> (show all
-listening and non-listening socket) option or without. It can be called with
-C<-o> (show PID) or without. And it can be called with C<-b> (show executables) or
-not.
-
-For parsing output of Unix "netstat", see parse_netstat().
+Whether to parse UDP (and UDP6) connections.
 
 =back
 
 Return value:
 
-Returns an enveloped result (an array). First element (status) is an integer containing HTTP status code (200 means OK, 4xx caller error, 5xx function error). Second element (msg) is a string containing error message, or 'OK' if status is 200. Third element (result) is optional, the actual result. Fourth element (meta) is called result metadata and is optional, a hash that contains extra information.
+Returns an enveloped result (an array).
+
+First element (status) is an integer containing HTTP status code
+(200 means OK, 4xx caller error, 5xx function error). Second element
+(msg) is a string containing error message, or 'OK' if status is
+200. Third element (result) is optional, the actual result. Fourth
+element (meta) is called result metadata and is optional, a hash
+that contains extra information.
+
+ (any)
 
 =head1 SEE ALSO
 
