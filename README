@@ -2,8 +2,8 @@ NAME
     Parse::Netstat - Parse the output of "netstat" command
 
 VERSION
-    This document describes version 0.08 of Parse::Netstat (from Perl
-    distribution Parse-Netstat), released on 2014-11-09.
+    This document describes version 0.09 of Parse::Netstat (from Perl
+    distribution Parse-Netstat), released on 2014-11-30.
 
 SYNOPSIS
      use Parse::Netstat qw(parse_netstat parse_netstat_win);
