@@ -1,74 +1,43 @@
 NAME
-    Parse::Netstat - Parse the output of "netstat" command
+    Parse::Netstat - Parse netstat output
 
 VERSION
-    This document describes version 0.09 of Parse::Netstat (from Perl
-    distribution Parse-Netstat), released on 2014-11-30.
+    This document describes version 0.10 of Parse::Netstat (from Perl
+    distribution Parse-Netstat), released on 2014-12-01.
 
 SYNOPSIS
-     use Parse::Netstat qw(parse_netstat parse_netstat_win);
-
-     my $output = `netstat -anp`;
-     my $res = parse_netstat output => $output;
-
-    Sample result:
-
-     [
-      200,
-      "OK",
-      {
-        active_conns => [
-          {
-            foreign_host => "0.0.0.0",
-            foreign_port => "*",
-            local_host => "127.0.0.1",
-            local_port => 1027,
-            proto => "tcp",
-            recvq => 0,
-            sendq => 0,
-            state => "LISTEN",
-          },
-          ...
-          {
-            foreign_host => "0.0.0.0",
-            foreign_port => "*",
-            local_host => "192.168.0.103",
-            local_port => 56668,
-            proto => "udp",
-            recvq => 0,
-            sendq => 0,
-          },
-          ...
-          {
-            flags   => "ACC",
-            inode   => 15631,
-            path    => "\@/tmp/dbus-VS3SLhDMEu",
-            pid     => 4513,
-            program => "dbus-daemon",
-            proto   => "unix",
-            refcnt  => 2,
-            state   => "LISTENING",
-            type    => "STREAM",
-          },
-        ],
-      }
-     ]
+     use Parse::Netstat qw(parse_netstat);
+     my $res = parse_netstat(output => join("", `netstat -anp`), flavor=>'linux');
 
 FUNCTIONS
   parse_netstat(%args) -> [status, msg, result, meta]
-    Parse the output of Unix "netstat" command.
+    Parse the output of "netstat" command.
 
     Examples:
 
      parse_netstat();
-    Netstat can be called with C<-n> (show raw IP addresses and port numbers instead
-    of hostnames or port names) or without. It can be called with C<-a> (show all
-    listening and non-listening socket) option or without. And can be called with
-    C<-p> (show PID/program names) or without.
+    This program support several flavors of netstat. The default flavor is C<linux>.
+    See C<--flavor> on how to set flavor.
 
-    For parsing output of Windows "netstat", see parse_netstat_win().
+    Since different flavors provide different fields and same-named fields
+    might contain data in different format, please see the sample parse
+    output for each flavor you want to support and adjust accordingly.
 
     Arguments ('*' denotes required arguments):
+
+    *   flavor => *str* (default: "linux")
+
+        Flavor of netstat.
+
+        For Linux, it supports the output of "netstat -an" or "netstat
+        -anp".
+
+        For FreeBSD, it supports "netstat" or "netstat -an".
+
+        For Solaris, it supports "netstat".
+
+        For Windows, it supports "netstat" or "netstat -an" or "netstat
+        -anp".
 
     *   output* => *str*
 
@@ -79,11 +48,11 @@ FUNCTIONS
 
     *   tcp => *bool* (default: 1)
 
-        Whether to parse TCP (and TCP6) connections.
+        Whether to parse TCP connections.
 
     *   udp => *bool* (default: 1)
 
-        Whether to parse UDP (and UDP6) connections.
+        Whether to parse UDP connections.
 
     *   unix => *bool* (default: 1)
 
@@ -102,48 +71,11 @@ FUNCTIONS
 
      (any)
 
-  parse_netstat_win(%args) -> [status, msg, result, meta]
-    Parse the output of Windows "netstat" command.
-
-    Netstat can be called with "-n" (show raw IP addresses and port numbers
-    instead of hostnames or port names) or without. It can be called with
-    "-a" (show all listening and non-listening socket) option or without. It
-    can be called with "-o" (show PID) or without. And it can be called with
-    "-b" (show executables) or not.
-
-    For parsing output of Unix "netstat", see parse_netstat().
-
-    Arguments ('*' denotes required arguments):
-
-    *   output* => *str*
-
-        Output of netstat command.
-
-        This function only parses program's output. You need to invoke
-        "netstat" on your own.
-
-    *   tcp => *bool* (default: 1)
-
-        Whether to parse TCP (and TCP6) connections.
-
-    *   udp => *bool* (default: 1)
-
-        Whether to parse UDP (and UDP6) connections.
-
-    Return value:
-
-    Returns an enveloped result (an array).
-
-    First element (status) is an integer containing HTTP status code (200
-    means OK, 4xx caller error, 5xx function error). Second element (msg) is
-    a string containing error message, or 'OK' if status is 200. Third
-    element (result) is optional, the actual result. Fourth element (meta)
-    is called result metadata and is optional, a hash that contains extra
-    information.
-
-     (any)
-
 SEE ALSO
+    Parse::Netstat::* for per-flavor notes and sample outputs.
+
+    App::ParseNetstat provides a CLI for this module.
+
 HOMEPAGE
     Please visit the project's homepage at
     <https://metacpan.org/release/Parse-Netstat>.

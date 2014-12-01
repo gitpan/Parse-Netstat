@@ -1,5 +1,5 @@
 {
-   "abstract" : "Parse the output of \"netstat\" command",
+   "abstract" : "Parse netstat output",
    "author" : [
       "perlancar <perlancar@cpan.org>"
    ],
@@ -16,7 +16,8 @@
    "prereqs" : {
       "configure" : {
          "requires" : {
-            "ExtUtils::MakeMaker" : "6.30"
+            "ExtUtils::MakeMaker" : "6.30",
+            "File::ShareDir::Install" : "0.03"
          }
       },
       "develop" : {
@@ -29,13 +30,13 @@
       },
       "runtime" : {
          "requires" : {
-            "Perinci::CmdLine::Any" : "0.06",
             "Rinci" : "v1.1.0",
             "perl" : "5.010001"
          }
       },
       "test" : {
          "requires" : {
+            "File::Slurp::Tiny" : "0",
             "File::Spec" : "0",
             "IO::Handle" : "0",
             "IPC::Open3" : "0",
@@ -55,15 +56,20 @@
          "web" : "https://github.com/sharyanto/perl-Parse-Netstat"
       }
    },
-   "version" : "0.09",
+   "version" : "0.10",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.018001"
       },
       "plugins" : [
          {
-            "class" : "Dist::Zilla::Plugin::Rinci::ScriptFromFunc",
-            "name" : "Rinci::ScriptFromFunc",
+            "class" : "Dist::Zilla::Plugin::InsertCodeResult",
+            "name" : "InsertCodeResult",
+            "version" : "0.03"
+         },
+         {
+            "class" : "Dist::Zilla::Plugin::InsertExample",
+            "name" : "InsertExample",
             "version" : "0.03"
          },
          {
@@ -243,7 +249,7 @@
                      {
                         "class" : "Pod::Weaver::Plugin::Rinci",
                         "name" : "@Author::PERLANCAR/Rinci",
-                        "version" : "0.18"
+                        "version" : "0.19"
                      },
                      {
                         "class" : "Pod::Weaver::Section::Leftovers",

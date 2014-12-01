@@ -1,14 +1,16 @@
 ---
-abstract: 'Parse the output of "netstat" command'
+abstract: 'Parse netstat output'
 author:
   - 'perlancar <perlancar@cpan.org>'
 build_requires:
+  File::Slurp::Tiny: '0'
   File::Spec: '0'
   IO::Handle: '0'
   IPC::Open3: '0'
   Test::More: '0.98'
 configure_requires:
   ExtUtils::MakeMaker: '6.30'
+  File::ShareDir::Install: '0.03'
 dynamic_config: 0
 generated_by: 'Dist::Zilla version 5.015, CPAN::Meta::Converter version 2.140640'
 license: perl
@@ -17,21 +19,24 @@ meta-spec:
   version: '1.4'
 name: Parse-Netstat
 requires:
-  Perinci::CmdLine::Any: '0.06'
   Rinci: v1.1.0
   perl: '5.010001'
 resources:
   bugtracker: https://rt.cpan.org/Public/Dist/Display.html?Name=Parse-Netstat
   homepage: https://metacpan.org/release/Parse-Netstat
   repository: git://github.com/sharyanto/perl-Parse-Netstat.git
-version: '0.09'
+version: '0.10'
 x_Dist_Zilla:
   perl:
     version: '5.018001'
   plugins:
     -
-      class: Dist::Zilla::Plugin::Rinci::ScriptFromFunc
-      name: Rinci::ScriptFromFunc
+      class: Dist::Zilla::Plugin::InsertCodeResult
+      name: InsertCodeResult
+      version: '0.03'
+    -
+      class: Dist::Zilla::Plugin::InsertExample
+      name: InsertExample
       version: '0.03'
     -
       class: Dist::Zilla::Plugin::GatherDir
@@ -175,7 +180,7 @@ x_Dist_Zilla:
             -
               class: Pod::Weaver::Plugin::Rinci
               name: '@Author::PERLANCAR/Rinci'
-              version: '0.18'
+              version: '0.19'
             -
               class: Pod::Weaver::Section::Leftovers
               name: '@Author::PERLANCAR/Leftovers'
