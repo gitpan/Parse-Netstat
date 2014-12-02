@@ -1,7 +1,7 @@
 package Parse::Netstat::linux;
 
-our $DATE = '2014-12-01'; # DATE
-our $VERSION = '0.10'; # VERSION
+our $DATE = '2014-12-02'; # DATE
+our $VERSION = '0.11'; # VERSION
 
 use 5.010001;
 use strict;
@@ -118,7 +118,7 @@ Parse::Netstat::linux - Parse the output of Linux "netstat" command
 
 =head1 VERSION
 
-This document describes version 0.10 of Parse::Netstat::linux (from Perl distribution Parse-Netstat), released on 2014-12-01.
+This document describes version 0.11 of Parse::Netstat::linux (from Perl distribution Parse-Netstat), released on 2014-12-02.
 
 =head1 SYNOPSIS
 

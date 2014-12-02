@@ -8,7 +8,7 @@ use Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(parse_netstat);
 
-our $VERSION = '0.10'; # VERSION
+our $VERSION = '0.11'; # VERSION
 
 our %SPEC;
 
@@ -141,7 +141,7 @@ Parse::Netstat::solaris - Parse the output of Solaris "netstat" command
 
 =head1 VERSION
 
-This document describes version 0.10 of Parse::Netstat::solaris (from Perl distribution Parse-Netstat), released on 2014-12-01.
+This document describes version 0.11 of Parse::Netstat::solaris (from Perl distribution Parse-Netstat), released on 2014-12-02.
 
 =head1 SYNOPSIS
 

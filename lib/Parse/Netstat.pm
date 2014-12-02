@@ -1,7 +1,7 @@
 package Parse::Netstat;
 
-our $DATE = '2014-12-01'; # DATE
-our $VERSION = '0.10'; # VERSION
+our $DATE = '2014-12-02'; # DATE
+our $VERSION = '0.11'; # VERSION
 
 use 5.010001;
 use strict;
@@ -19,11 +19,13 @@ $SPEC{parse_netstat} = {
     description => <<'_',
 
 This program support several flavors of netstat. The default flavor is `linux`.
-See `--flavor` on how to set flavor.
+Use `--flavor` to select which flavor you want.
 
 Since different flavors provide different fields and same-named fields might
-contain data in different format, please see the sample parse output for each
-flavor you want to support and adjust accordingly.
+contain data in different format, and also not all kinds of possible output from
+a single flavor are supported, please see the sample parse output for each
+flavor (in corresponding `Parse::Netstat::*` per-flavor module) you want to use
+and adjust accordingly.
 
 _
     args => {
@@ -44,28 +46,20 @@ _
             summary => 'Flavor of netstat',
             schema  => ['str*', in => ['linux', 'solaris', 'freebsd', 'win32']],
             default => 'linux',
-            description => <<'_',
-
-For Linux, it supports the output of `netstat -an` or `netstat -anp`.
-
-For FreeBSD, it supports `netstat` or `netstat -an`.
-
-For Solaris, it supports `netstat`.
-
-For Windows, it supports `netstat` or `netstat -an` or `netstat -anp`.
-
-_
         },
         tcp => {
-            summary => 'Whether to parse TCP connections',
+            summary => 'Parse TCP connections',
+            'summary.alt.bool.not' => 'Do not parse TCP connections',
             schema  => [bool => default => 1],
         },
         udp => {
-            summary => 'Whether to parse UDP connections',
+            summary => 'Parse UDP connections',
+            'summary.alt.bool.not' => 'Do not parse UDP connections',
             schema  => [bool => default => 1],
         },
         unix => {
-            summary => 'Whether to parse Unix socket connections',
+            summary => 'Parse Unix socket connections',
+            'summary.alt.bool.not' => 'Do not parse Unix socket connections',
             schema  => [bool => default => 1],
         },
     },
@@ -121,7 +115,7 @@ Parse::Netstat - Parse netstat output
 
 =head1 VERSION
 
-This document describes version 0.10 of Parse::Netstat (from Perl distribution Parse-Netstat), released on 2014-12-01.
+This document describes version 0.11 of Parse::Netstat (from Perl distribution Parse-Netstat), released on 2014-12-02.
 
 =head1 SYNOPSIS
 
@@ -139,11 +133,13 @@ Examples:
 
  parse_netstat();
 This program support several flavors of netstat. The default flavor is C<linux>.
-See C<--flavor> on how to set flavor.
+Use C<--flavor> to select which flavor you want.
 
 Since different flavors provide different fields and same-named fields might
-contain data in different format, please see the sample parse output for each
-flavor you want to support and adjust accordingly.
+contain data in different format, and also not all kinds of possible output from
+a single flavor are supported, please see the sample parse output for each
+flavor (in corresponding C<Parse::Netstat::*> per-flavor module) you want to use
+and adjust accordingly.
 
 Arguments ('*' denotes required arguments):
 
@@ -152,14 +148,6 @@ Arguments ('*' denotes required arguments):
 =item * B<flavor> => I<str> (default: "linux")
 
 Flavor of netstat.
-
-For Linux, it supports the output of C<netstat -an> or C<netstat -anp>.
-
-For FreeBSD, it supports C<netstat> or C<netstat -an>.
-
-For Solaris, it supports C<netstat>.
-
-For Windows, it supports C<netstat> or C<netstat -an> or C<netstat -anp>.
 
 =item * B<output>* => I<str>
 
@@ -170,15 +158,15 @@ own.
 
 =item * B<tcp> => I<bool> (default: 1)
 
-Whether to parse TCP connections.
+Parse TCP connections.
 
 =item * B<udp> => I<bool> (default: 1)
 
-Whether to parse UDP connections.
+Parse UDP connections.
 
 =item * B<unix> => I<bool> (default: 1)
 
-Whether to parse Unix socket connections.
+Parse Unix socket connections.
 
 =back
 

@@ -2,8 +2,8 @@ NAME
     Parse::Netstat - Parse netstat output
 
 VERSION
-    This document describes version 0.10 of Parse::Netstat (from Perl
-    distribution Parse-Netstat), released on 2014-12-01.
+    This document describes version 0.11 of Parse::Netstat (from Perl
+    distribution Parse-Netstat), released on 2014-12-02.
 
 SYNOPSIS
      use Parse::Netstat qw(parse_netstat);
@@ -17,27 +17,20 @@ FUNCTIONS
 
      parse_netstat();
     This program support several flavors of netstat. The default flavor is C<linux>.
-    See C<--flavor> on how to set flavor.
+    Use C<--flavor> to select which flavor you want.
 
     Since different flavors provide different fields and same-named fields
-    might contain data in different format, please see the sample parse
-    output for each flavor you want to support and adjust accordingly.
+    might contain data in different format, and also not all kinds of
+    possible output from a single flavor are supported, please see the
+    sample parse output for each flavor (in corresponding
+    "Parse::Netstat::*" per-flavor module) you want to use and adjust
+    accordingly.
 
     Arguments ('*' denotes required arguments):
 
     *   flavor => *str* (default: "linux")
 
         Flavor of netstat.
-
-        For Linux, it supports the output of "netstat -an" or "netstat
-        -anp".
-
-        For FreeBSD, it supports "netstat" or "netstat -an".
-
-        For Solaris, it supports "netstat".
-
-        For Windows, it supports "netstat" or "netstat -an" or "netstat
-        -anp".
 
     *   output* => *str*
 
@@ -48,15 +41,15 @@ FUNCTIONS
 
     *   tcp => *bool* (default: 1)
 
-        Whether to parse TCP connections.
+        Parse TCP connections.
 
     *   udp => *bool* (default: 1)
 
-        Whether to parse UDP connections.
+        Parse UDP connections.
 
     *   unix => *bool* (default: 1)
 
-        Whether to parse Unix socket connections.
+        Parse Unix socket connections.
 
     Return value:
 
